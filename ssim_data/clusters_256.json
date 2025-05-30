@@ -1,0 +1,9 @@
+{
+  "clusters": [],
+  "metadata": {
+    "image_size": 256,
+    "threshold": 0.98,
+    "total_images": 484,
+    "total_pairs": 116886
+  }
+}
