@@ -5,10 +5,16 @@ from pathlib import Path
 from flask_cors import CORS
 from PIL import Image, ImageDraw, ImageFont
 import io
+import unicodedata
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 storage = SSIMStorage()
+
+def normalize_ascii_filename(filename):
+    # Remove accents and non-ASCII characters
+    nfkd = unicodedata.normalize('NFKD', filename)
+    return ''.join([c for c in nfkd if not unicodedata.combining(c) and ord(c) < 128])
 
 @app.route('/')
 def index():
@@ -23,16 +29,19 @@ def get_logos():
         similarities = storage.load_block4_similarities_for_set(set_type)
         logos = set()
         for f1, f2 in similarities.keys():
-            logos.add(f1 if f1.startswith(dir_prefix) else dir_prefix + f1.split('/')[-1])
-            logos.add(f2 if f2.startswith(dir_prefix) else dir_prefix + f2.split('/')[-1])
+            logo1 = f1 if f1.startswith(dir_prefix) else dir_prefix + f1.split('/')[-1]
+            logo2 = f2 if f2.startswith(dir_prefix) else dir_prefix + f2.split('/')[-1]
+            logos.add(normalize_ascii_filename(logo1))
+            logos.add(normalize_ascii_filename(logo2))
         return jsonify(sorted(list(logos)))
     else:
-        # Get all unique logo paths from the SSIM scores
         ssim_scores, metadata = storage.load_ssim_scores(name=f'ssim_scores_{set_type}')
         logos = set()
         for (f1, f2) in ssim_scores.keys():
-            logos.add(f1 if f1.startswith(dir_prefix) else dir_prefix + f1.split('/')[-1])
-            logos.add(f2 if f2.startswith(dir_prefix) else dir_prefix + f2.split('/')[-1])
+            logo1 = f1 if f1.startswith(dir_prefix) else dir_prefix + f1.split('/')[-1]
+            logo2 = f2 if f2.startswith(dir_prefix) else dir_prefix + f2.split('/')[-1]
+            logos.add(normalize_ascii_filename(logo1))
+            logos.add(normalize_ascii_filename(logo2))
         return jsonify(sorted(list(logos)))
 
 @app.route('/api/similar/<path:logo_path>')
@@ -71,6 +80,7 @@ def get_similar(logo_path):
 @app.route('/logos/<path:filename>')
 def serve_logo(filename):
     base_dir = os.path.abspath(os.path.dirname(__file__))
+    filename = normalize_ascii_filename(filename)
     # If the filename starts with the new ALL path, serve from there
     if filename.startswith('pngs_ALL_inkscape_512/'):
         rel_path = filename[len('pngs_ALL_inkscape_512/'):]
