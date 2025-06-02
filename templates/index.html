@@ -287,18 +287,18 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             padding: 1rem;
             transition: box-shadow 0.2s, transform 0.2s, background 0.2s, border 0.2s;
-            border: 2px solid transparent;
+            border: 6px solid transparent;
+            box-sizing: border-box;
         }
         .logo-item.selected {
             box-shadow: 0 4px 24px #ff5c1a44;
             transform: scale(1.04);
-            border: 2px solid #ff5c1a;
+            border: 6px solid #ff5c1a;
         }
         .logo-item:hover {
             background: #ff5c1a;
-            border: 2px solid #ff5c1a;
+            border: 6px solid #ff5c1a;
             box-shadow: 0 4px 24px #ff5c1a88;
-            transform: scale(1.04);
         }
         .modal {
             display: none;
@@ -443,7 +443,7 @@
         </div>
         <button id="exportSelectedBtn" style="background:#ff5c1a;color:#fff;border:none;padding:0.35rem 1.1rem;border-radius:0.3rem;font-size:0.98rem;cursor:pointer;box-shadow:0 2px 8px #0005;letter-spacing:0.04em;min-width:120px;min-height:32px;max-width:200px;max-height:40px;height:auto;width:auto;display:block;margin-left:2rem;">EXPORT</button>
     </div>
-    <div class="logo-grid" id="logoGrid"></div>
+            <div class="logo-grid" id="logoGrid"></div>
     <div class="main-container" id="mainContainer" style="display:none;">
         <div class="compare-area-centerer">
             <div class="compare-area">
@@ -542,13 +542,13 @@
             const logoGrid = document.getElementById('logoGrid');
             logoGrid.innerHTML = '';
             
-            logos.forEach(logo => {
-                const div = document.createElement('div');
-                div.className = 'logo-item';
+                    logos.forEach(logo => {
+                        const div = document.createElement('div');
+                        div.className = 'logo-item';
                 if (selectedGridLogos.includes(logo)) {
                     div.classList.add('selected');
                 }
-                div.style.position = 'relative';
+                    div.style.position = 'relative';
                 // Logo image only
                 const img = document.createElement('img');
                 img.src = `/logos/${logo}`;
@@ -558,22 +558,22 @@
                 img.style.objectFit = 'contain';
                 div.appendChild(img);
                 // Click handler for selection
-                div.onclick = (e) => {
-                    const wasFirst = selectedGridLogos[0];
-                    const idx = selectedGridLogos.indexOf(logo);
-                    if (idx === -1) {
-                        selectedGridLogos.push(logo);
-                    } else {
-                        selectedGridLogos.splice(idx, 1);
-                    }
-                    if (selectedGridLogos[0] !== wasFirst || selectedGridLogos.length === 0) {
-                        renderLogoGrid();
-                    } else {
-                        updateTileSelection(div, logo);
-                    }
-                };
-                logoGrid.appendChild(div);
-            });
+                    div.onclick = (e) => {
+                        const wasFirst = selectedGridLogos[0];
+                        const idx = selectedGridLogos.indexOf(logo);
+                        if (idx === -1) {
+                            selectedGridLogos.push(logo);
+                        } else {
+                            selectedGridLogos.splice(idx, 1);
+                        }
+                        if (selectedGridLogos[0] !== wasFirst || selectedGridLogos.length === 0) {
+                            renderLogoGrid();
+                        } else {
+                            updateTileSelection(div, logo);
+                        }
+                    };
+                        logoGrid.appendChild(div);
+                    });
         }
 
         // Helper to update only the tile's selection state
