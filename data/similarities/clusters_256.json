@@ -1,9 +1,3 @@
-{
-  "clusters": [],
-  "metadata": {
-    "image_size": 256,
-    "threshold": 0.98,
-    "total_images": 484,
-    "total_pairs": 116886
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:ea09971a857a5b160e1337f5ae82707b29467b9cdd51a90ab1f28dd3583320f1
+size 138
