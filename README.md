@@ -51,4 +51,20 @@ This project uses Flask for the backend and modern web technologies for the fron
 
 ## License
 
-[Add your license information here] 
+[Add your license information here]
+
+## 🚀 Deploying to Railway (Flask/Python)
+
+1. Ensure your `requirements.txt` is up to date and includes `gunicorn` and `flask`.
+2. Your `Procfile` should contain:
+   ```
+   web: gunicorn -w 4 -b 0.0.0.0:$PORT app.app:app
+   ```
+   (Adjust `app.app:app` if your Flask app is elsewhere.)
+3. Push your code to GitHub.
+4. On Railway:
+   - Create a new project and link your GitHub repo.
+   - Railway will auto-detect Python and install dependencies from `requirements.txt`.
+   - It will use your `Procfile` to start the app.
+5. Set any required environment variables in the Railway dashboard.
+6. Visit your Railway app URL to verify deployment. 
