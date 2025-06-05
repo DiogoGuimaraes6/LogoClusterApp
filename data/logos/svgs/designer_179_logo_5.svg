@@ -1,0 +1,10 @@
+<svg id="a" data-name="form" xmlns="http://www.w3.org/2000/svg" width="100" viewBox="0 0 100 100" height="100">
+  <defs>
+    <style>
+      .b {
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <path class="b" d="M20.12,0l50,50-20.12,20.12L0,20.12v79.88h100V0H20.12ZM87.62,87.62H12.38v-37.62l37.62,37.62,37.62-37.62L50.01,12.38h37.61v75.24Z"></path>
+</svg>

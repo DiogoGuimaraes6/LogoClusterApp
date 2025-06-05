@@ -1,26 +1,54 @@
 # Logo Cluster App
 
-A web application for browsing and comparing similar logos.
-
-## Requirements
-- macOS
-- Python 3.x (included with macOS)
-
-## How to Run
-1. Double-click the `run.command` file
-2. Wait for the setup to complete (this may take a few minutes the first time)
-3. The app will automatically open in your default web browser at http://127.0.0.1:5001
+A web application for exploring and analyzing logo designs, with features for finding similar logos and categorizing them.
 
 ## Features
-- Browse logo collections
-- Find similar logos using different comparison methods
-- Export logo comparisons as PNG images
 
-## Troubleshooting
-If you encounter any issues:
-1. Make sure you have Python 3.x installed
-2. Try running the app again
-3. If problems persist, try deleting the `venv` folder and running the app again
+- Browse logos by categories
+- Find similar logos using advanced similarity algorithms
+- Right-click context menu for quick access to similar logos
+- Responsive grid layout for logo display
 
-## Note
-The first time you run the app, it will take a few minutes to set up the Python environment and install dependencies. Subsequent runs will be faster. 
+## Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Running the App
+
+```bash
+python app/app.py
+```
+
+The app will be available at http://127.0.0.1:5001
+
+## Project Structure
+
+```
+LogoClusterApp/
+├── app/                    # Main application code
+│   ├── __init__.py
+│   ├── routes.py          # Flask routes
+│   ├── static/            # Static files (CSS, JS)
+│   └── templates/         # HTML templates
+├── data/                  # Data files
+│   ├── similarities/      # Similarity JSON files
+│   └── logos/            # Logo images
+├── tests/                # Test files
+├── docs/                 # Documentation
+├── requirements.txt      # Python dependencies
+├── README.md            # Project documentation
+├── Procfile             # Deployment configuration
+└── .gitignore          # Git ignore file
+```
+
+## Development
+
+This project uses Flask for the backend and modern web technologies for the frontend. The similarity calculations are pre-computed and stored in JSON files for fast access.
+
+## License
+
+[Add your license information here] 
